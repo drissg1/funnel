@@ -20,24 +20,24 @@ class FunnelClf:
 
     @classmethod
     def load(cls, vectorizer_path: str, model_path: str):
-        logger.info(f'Loading the model from {model_path}')
-        logger.info(f'Loading the vectorizer from {vectorizer_path}')
+        logger.info(f"Loading the model from {model_path}")
+        logger.info(f"Loading the vectorizer from {vectorizer_path}")
         model = load(model_path)
         vectorizer = load(vectorizer_path)
         return cls(model=model, vectorizer=vectorizer)
 
     def predict(self, email: str):
-        """ Used to predict which cluster the email belongs to
+        """Used to predict which cluster the email belongs to
 
         Args:
             email: The string representing the subject + body
         """
         start = time.perf_counter()
         email_msg = self.email_parser.parsestr(email)
-        subject = email_msg.get('Subject','')
+        subject = email_msg.get("Subject", "")
         body = get_body(email_msg)
-        doc = subject+body
-        logger.debug(f'Predicting on doc of size {len(doc)}')
+        doc = subject + body
+        logger.debug(f"Predicting on doc of size {len(doc)}")
         email_bow = self.vectorizer.transform([doc])
         top_topic = self.model.predict(email_bow)[0]
         end = time.perf_counter()
@@ -60,5 +60,4 @@ def get_body(email_msg):
     if body:
         return body
     else:
-        return ''
-
+        return ""

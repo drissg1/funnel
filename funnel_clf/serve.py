@@ -15,8 +15,10 @@ logging.basicConfig(level=LOG_LEVEL)
 logger = logging.getLogger(__name__)
 
 # Two global objects, the fastapi ASGI server object and the Kmeans Model Classifier
-MODEL_PATH = pkg_resources.resource_filename('funnel_clf', 'data/kmeans_model.joblib')
-VECTORIZER_PATH = pkg_resources.resource_filename('funnel_clf', 'data/tfidf_vectorizer.joblib')
+MODEL_PATH = pkg_resources.resource_filename("funnel_clf", "data/kmeans_model.joblib")
+VECTORIZER_PATH = pkg_resources.resource_filename(
+    "funnel_clf", "data/tfidf_vectorizer.joblib"
+)
 
 CLASSIFIER = FunnelClf.load(model_path=MODEL_PATH, vectorizer_path=VECTORIZER_PATH)
 app = FastAPI()
@@ -36,4 +38,6 @@ def predict_topic(email_model: EmailPost):
         return EmailPostResponse(top_topic=top_topic)
     except:
         logger.error("An error occured while predicting the top topic", exc_info=True)
-        raise fastapi.HTTPException(500, detail="There was an error creating the prediction response!")
+        raise fastapi.HTTPException(
+            500, detail="There was an error creating the prediction response!"
+        )

@@ -12,13 +12,15 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),
-    python_requires='>=3.7',
+    python_requires=">=3.7",
     install_requires=[
-        'scikit-learn==0.23.1',
-        'fastapi',
-        'uvicorn',
-        'gunicorn',
-        'pandas',
+        "scikit-learn==0.23.1",
+        "fastapi",
+        "uvicorn",
+        "gunicorn",
+        "pandas",
+        "black",
+        "pytest",
     ],
-    package_data={'funnel_clf': ['data/']}
+    package_data={"funnel_clf": ["data/"]},
 )

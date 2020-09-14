@@ -61,5 +61,7 @@ Python sample code for hitting endpoint:
 resp = requests.post('http://127.0.0.1:8000/predict',json={'email':email_str})
 resp.json()
 ```
-
+### Tests and Formating
+To format all python files in repo run ```black .```
+To run avaible pytest run ```pytest```
 
